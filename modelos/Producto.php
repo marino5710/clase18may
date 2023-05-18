@@ -9,10 +9,10 @@ class Producto extends Conexion{
 
     public function __construct($args = [ ])
     {
-        $this->producto_id = $args['producto_id'];
-        $this->producto_nombre = $args['producto_nombre'];
-        $this->producto_precio = $args['producto_precio'];
-        $this->producto_situacion = $args['producto_situacion'];
+        $this->producto_id = $args['producto_id'] ?? null ;
+        $this->producto_nombre = $args['producto_nombre'] ?? '' ;
+        $this->producto_precio = $args['producto_precio'] ?? '';
+        $this->producto_situacion = $args['producto_situacion'] ?? '';
     }
 
 }

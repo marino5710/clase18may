@@ -1,3 +1,5 @@
 <?php
+require '/modelos/Producto.php'; 
 
-var_dump($_POST);
+
+$producto = new Producto(); 
