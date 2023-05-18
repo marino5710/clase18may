@@ -2,4 +2,4 @@
 require '/modelos/Producto.php'; 
 
 
-$producto = new Producto(); 
+$producto = new Producto($_POST); 
