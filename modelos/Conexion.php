@@ -30,4 +30,19 @@ abstract class Conexion{
         //devolvemos resultado
         return $resultado;
     }
+
+    
+    public static function servir($sql){
+        // conectandose a la bd con metodo conectar
+        self::conectar();
+        //preparamos la sentencia 
+        $sentencia= self::$conexion->prepare($sql);
+        //ejecutamos sentencia
+        $sentencia->execute();
+        $resultados = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
+        //cerrando conexion
+        self::$conexion = null;
+        //devolvemos resultado
+        return $resultados;
+    }
 }
