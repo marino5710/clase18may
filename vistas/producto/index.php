@@ -11,17 +11,17 @@
     <div class="container justify-content-center">
         <h1 class="text-center">FORMULARIO DE PRODUCTOS</h1>
         <div class="row justify-content-center">
-            <form action="" class="col-lg-8 border bg-light p-3">
+            <form action="/CLASE18MAY/controladores/productos/guardar.php" method="$_POST" class="col-lg-8 border bg-light p-3">
                 <div class="row mb-3">
                     <div class="col">
                         <label for="producto_nombre" class="form-label">Nombre del producto</label>
-                        <input type="text" class="form-control" id="producto_nombre" name="producto_nombre" required placeholder="Nombre del producto">
+                        <input type="text" class="form-control"  name="producto_nombre" id="producto_nombre" placeholder="Nombre del producto">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col">
                         <label for="producto_precio" class="form-label">Nombre del producto</label>
-                        <input type="text" class="form-control" id="producto_precio" name="producto_precio" required placeholder="Precio del producto">
+                        <input type="text" class="form-control" name="producto_precio" id="producto_precio"  placeholder="Precio del producto">
                     </div>
                 </div>
                 <div class="row mb-3">
