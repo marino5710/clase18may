@@ -1,49 +1,51 @@
-<?php 
+<?php
 
 abstract class Conexion{
-    public static $conexion = null; 
+    public static $conexion = null;
 
     private static function conectar(){
-        try {
-            //conexion a la bd de informix
-            self::$conexion = new PDO("informix:host=host.docker.internal; service=9088;database=mdn; server=informix; protocol=onsoctcp;EnableScrollableCursors=1", "informix", "in4mix");
-            //echo "conectado"; 
-        } catch (PDOException $e) {
-//imprime en pantalla el error
-            echo "Error de Conexion de base de datos";
+        try{
+            //CONEXION A LA BD DE INFORMIX EN DOCKER 
+            self::$conexion = new PDO('informix:host=host.docker.internal; service=9088; database=mdn; server=informix; protocol=onsoctcp;EnableScrollableCursors = 1','informix','in4mix'); 
+            // DEFINIR EL MANEJO DE EXCEPCIONES
+            self::$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // echo "CONECTADO";
+        }catch(PDOException $e){
+            // IMPRIME EN PANTALLA EL ERROR
+            echo "Error de conexion de BD";
+            echo "<br>";
             echo $e->getMessage();
-            exit; 
+            exit;
         }
 
-        return self::$conexion; 
+        return self::$conexion;
     }
 
     public static function ejecutar($sql){
-        // conectandose a la bd con metodo conectar
+        // CONECTANDOSE A LA BD CON EL METODO CONECTAR
         self::conectar();
-        //preparamos la sentencia 
-        $sentencia= self::$conexion->prepare($sql);
-        //ejecutamos sentencia
+        // PREPARAMOS LA SENTENCIA
+        $sentencia = self::$conexion->prepare($sql);
+        // EJECUTAMOS A SENTENCIA
         $resultado = $sentencia->execute();
-        //cerrando conexion
+        // CERRANDO LA CONEXION
         self::$conexion = null;
-        //devolvemos resultado
+        // DEVOLVEMOS RESULTADOS
         return $resultado;
     }
 
-    
     public static function servir($sql){
-        // conectandose a la bd con metodo conectar
+        // CONECTANDOSE A LA BD CON EL METODO CONECTAR
         self::conectar();
-        //preparamos la sentencia 
-        $sentencia= self::$conexion->prepare($sql);
-        //ejecutamos sentencia
+        // PREPARAMOS LA SENTENCIA
+        $sentencia = self::$conexion->prepare($sql);
+        // EJECUTAMOS A SENTENCIA
         $sentencia->execute();
-        $resultados = $sentencia->fetchAll(PDO::FETCH_ASSOC); 
-        //cerrando conexion
+        $resultados = $sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+        // CERRANDO LA CONEXION
         self::$conexion = null;
-        //devolvemos resultado
+        // DEVOLVEMOS RESULTADOS
         return $resultados;
     }
-    
 }
